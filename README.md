@@ -1,11 +1,9 @@
-<h1 align="center" style="font-weight: bold;">URL Shortener 💻</h1>
+<h1 align="center" style="font-weight: bold;">URL Shortener - Backend 💻</h1>
 
 <p align="center">
  <a href="#tech">Technologies</a> • 
  <a href="#started">Getting Started</a> • 
- <a href="#routes">API Endpoints</a> •
- <a href="#colab">Collaborators</a> •
- <a href="#contribute">Contribute</a>
+ <a href="#routes">API Endpoints</a>
 </p>
 
 <p align="center">
@@ -14,7 +12,7 @@
 
 <h2 id="tech">💻 Technologies</h2>
 
-- Java 21
+- Java 24
 - Spring Boot 3
 - Maven
 - NanoID (for short URL generation)
@@ -107,12 +105,3 @@ GET /api/urls/abc12
   "originalUrl": "https://www.example.com/your-very-long-url"
 }
 ```
-
-<h2 id="contribute">📫 Contribute</h2>
-
-Steps for contributing:
-
-1. `git clone https://github.com/valter-junnior/urlshortener.git`
-2. `git checkout -b feature/your-feature-name`
-3. Follow commit conventions
-4. Open a Pull Request explaining your changes with screenshots if necessary, and wait for the review!
