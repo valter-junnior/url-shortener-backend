@@ -104,3 +104,11 @@ GET /api/urls/abc12
   "originalUrl": "https://www.example.com/your-very-long-url"
 }
 ```
+
+<h2 id="frontend">🔗 Frontend</h2>
+
+The frontend for this project is built using React . You can find the frontend repository here:
+
+[URL Shortener Frontend Repository](https://github.com/valter-junnior/url-shortener-frontend)
+
+Make sure to set up and run the frontend as instructed in the frontend README, but after start the backend.
