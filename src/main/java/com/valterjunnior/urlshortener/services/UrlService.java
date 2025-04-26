@@ -1,6 +1,5 @@
 package com.valterjunnior.urlshortener.services;
 
-import com.valterjunnior.urlshortener.config.AppConfig;
 import com.valterjunnior.urlshortener.dtos.UrlCreateRequest;
 import com.valterjunnior.urlshortener.dtos.UrlResponse;
 import com.valterjunnior.urlshortener.exceptions.UrlNotFoundException;
@@ -15,7 +14,6 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UrlService {
-    private final AppConfig appConfig;
     private final UrlRepository urlRepository;
     private final ShortIdGenerator shortIdGenerator;
 
@@ -38,6 +36,6 @@ public class UrlService {
     }
 
     public UrlResponse getUrlResponse(Url url) {
-        return new UrlResponse(appConfig.getBaseUrl(), url.getShortUrl(), url.getOriginalUrl());
+        return new UrlResponse(url.getShortUrl(), url.getOriginalUrl());
     }
 }

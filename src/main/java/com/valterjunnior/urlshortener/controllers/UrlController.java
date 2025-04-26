@@ -2,7 +2,6 @@ package com.valterjunnior.urlshortener.controllers;
 
 import com.valterjunnior.urlshortener.dtos.UrlCreateRequest;
 import com.valterjunnior.urlshortener.dtos.UrlResponse;
-import com.valterjunnior.urlshortener.models.Url;
 import com.valterjunnior.urlshortener.services.UrlService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

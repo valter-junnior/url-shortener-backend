@@ -34,15 +34,16 @@ How to run this project locally.
 Clone the repository:
 
 ```bash
-git clone https://github.com/valterjunnior/urlshortener.git
+git clone https://github.com/valter-junnior/url-shortener-backend.git
 ```
 
 <h3>Config .env variables</h3>
 
-No `.env` file needed, but you can configure properties in `src/main/resources/application.properties`, such as the base URL:
+you can configure properties in `src/main/resources/application.properties`:
 
 ```properties
-app.base-url=http://localhost:8080/
+spring.application.name=url-shortener
+spring.data.mongodb.uri=mongodb://root:rootpassword@localhost:27017/urlshortenerdb?authSource=admin
 ```
 
 <h3>Starting</h3>
@@ -82,8 +83,7 @@ List of available routes.
 
 ```json
 {
-  "baseUrl": "http://localhost:8080",
-  "shortUrl": "http://localhost:8080/abc12",
+  "shortUrl": "abc12",
   "originalUrl": "https://www.example.com/your-very-long-url"
 }
 ```
@@ -100,8 +100,7 @@ GET /api/urls/abc12
 
 ```json
 {
-  "baseUrl": "http://localhost:8080",
-  "shortUrl": "http://localhost:8080/abc12",
+  "shortUrl": "abc12",
   "originalUrl": "https://www.example.com/your-very-long-url"
 }
 ```
