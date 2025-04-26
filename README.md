@@ -1,0 +1,118 @@
+<h1 align="center" style="font-weight: bold;">URL Shortener 💻</h1>
+
+<p align="center">
+ <a href="#tech">Technologies</a> • 
+ <a href="#started">Getting Started</a> • 
+ <a href="#routes">API Endpoints</a> •
+ <a href="#colab">Collaborators</a> •
+ <a href="#contribute">Contribute</a>
+</p>
+
+<p align="center">
+    <b>A simple API to shorten and retrieve URLs easily.</b>
+</p>
+
+<h2 id="tech">💻 Technologies</h2>
+
+- Java 21
+- Spring Boot 3
+- Maven
+- NanoID (for short URL generation)
+- MongoDB
+
+<h2 id="started">🚀 Getting started</h2>
+
+How to run this project locally.
+
+<h3>Prerequisites</h3>
+
+- [Java 21](https://adoptium.net/)
+- [Maven](https://maven.apache.org/)
+- [Git](https://git-scm.com/)
+- [MongoDB](https://www.mongodb.com/try/download/community)
+
+<h3>Cloning</h3>
+
+Clone the repository:
+
+```bash
+git clone https://github.com/valterjunnior/urlshortener.git
+```
+
+<h3>Config .env variables</h3>
+
+No `.env` file needed, but you can configure properties in `src/main/resources/application.properties`, such as the base URL:
+
+```properties
+app.base-url=http://localhost:8080/
+```
+
+<h3>Starting</h3>
+
+Navigate to the project folder and run:
+
+```bash
+cd urlshortener
+./mvnw spring-boot:run
+```
+or using Maven installed globally:
+
+```bash
+mvn spring-boot:run
+```
+
+<h2 id="routes">📍 API Endpoints</h2>
+
+List of available routes.
+
+| Route | Description |
+|------|-------------|
+| <kbd>POST /api/urls</kbd> | Create a short URL |
+| <kbd>GET /api/urls/{shortUrl}</kbd> | Retrieve the original URL from a short URL |
+
+<h3>POST /api/urls</h3>
+
+**REQUEST**
+
+```json
+{
+  "url": "https://www.example.com/your-very-long-url"
+}
+```
+
+**RESPONSE**
+
+```json
+{
+  "baseUrl": "http://localhost:8080",
+  "shortUrl": "http://localhost:8080/abc12",
+  "originalUrl": "https://www.example.com/your-very-long-url"
+}
+```
+
+<h3>GET /api/urls/{shortUrl}</h3>
+
+**Example Request**
+
+```bash
+GET /api/urls/abc12
+```
+
+**RESPONSE**
+
+```json
+{
+  "baseUrl": "http://localhost:8080",
+  "shortUrl": "http://localhost:8080/abc12",
+  "originalUrl": "https://www.example.com/your-very-long-url"
+}
+```
+
+<h2 id="contribute">📫 Contribute</h2>
+
+Steps for contributing:
+
+1. `git clone https://github.com/valter-junnior/urlshortener.git`
+2. `git checkout -b feature/your-feature-name`
+3. Follow commit conventions
+4. Open a Pull Request explaining your changes with screenshots if necessary, and wait for the review!
