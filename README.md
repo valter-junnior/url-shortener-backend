@@ -54,6 +54,7 @@ Navigate to the project folder and run:
 cd urlshortener
 ./mvnw spring-boot:run
 ```
+
 or using Maven installed globally:
 
 ```bash
@@ -64,12 +65,39 @@ mvn spring-boot:run
 
 List of available routes.
 
-| Route | Description |
-|------|-------------|
-| <kbd>POST /api/urls</kbd> | Create a short URL |
-| <kbd>GET /api/urls/{shortUrl}</kbd> | Retrieve the original URL from a short URL |
+| Route                                   | Description              |
+|-----------------------------------------|--------------------------|
+| <kbd>GET /api/links</kbd>               | Get all short URL        |
+| <kbd>POST /api/links</kbd>              | Create a short URL       |
+| <kbd>GET /api/links/{shortUrl}</kbd>    | Redirect to original URL |
+| <kbd>DELETE /api/links/{shortUrl}</kbd> | Delete a short URL       |
 
-<h3>POST /api/urls</h3>
+<h3>GET /api/links</h3>
+
+**REQUEST**
+
+```bash
+GET /api/links
+```
+
+**RESPONSE**
+
+````json
+[
+  {
+    "shortUrl": "abc12",
+    "originalUrl": "https://www.example.com/your-very-long-url",
+    "count": 2
+  },
+  {
+    "shortUrl": "xyz34",
+    "originalUrl": "https://www.example.com/another-long-url",
+    "count": 1
+  }
+]
+````
+
+<h3>POST /api/links</h3>
 
 **REQUEST**
 
@@ -88,7 +116,7 @@ List of available routes.
 }
 ```
 
-<h3>GET /api/urls/{shortUrl}</h3>
+<h3>GET /api/links/{shortUrl}</h3>
 
 **Example Request**
 
@@ -98,12 +126,23 @@ GET /api/urls/abc12
 
 **RESPONSE**
 
-```json
-{
-  "shortUrl": "abc12",
-  "originalUrl": "https://www.example.com/your-very-long-url"
-}
+```http request
+HTTP/1.1 301 Moved Permanently
 ```
+
+<h3>DELETE /api/links/{shortUrl}</h3>
+
+**Example Request**
+
+```bash
+DELETE /api/urls/abc12
+```
+
+**RESPONSE**
+
+````http request
+HTTP/1.1 204 No Content
+````
 
 <h2 id="frontend">🔗 Frontend</h2>
 

@@ -8,4 +8,5 @@ import lombok.Getter;
 public class UrlResponse {
     private final String shortUrl;
     private final String originalUrl;
+    private final int clicks;
 }

@@ -4,38 +4,61 @@ import com.valterjunnior.urlshortener.dtos.UrlCreateRequest;
 import com.valterjunnior.urlshortener.dtos.UrlResponse;
 import com.valterjunnior.urlshortener.exceptions.UrlNotFoundException;
 import com.valterjunnior.urlshortener.models.Url;
+import com.valterjunnior.urlshortener.models.UrlClick;
+import com.valterjunnior.urlshortener.repostories.UrlClickRepository;
 import com.valterjunnior.urlshortener.repostories.UrlRepository;
 import com.valterjunnior.urlshortener.utils.ShortIdGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class UrlService {
     private final UrlRepository urlRepository;
+    private final UrlClickRepository urlClickRepository;
     private final ShortIdGenerator shortIdGenerator;
+
+    public List<UrlResponse> all() {
+        List<Url> urls = urlRepository.findAll();
+
+        return urls.stream().map(url -> getUrlResponse(url, urlClickRepository.countByUrlId(url.getId()))).toList();
+    }
 
     public UrlResponse create(UrlCreateRequest urlCreateRequest) {
         Url urlCreated = urlRepository.save(
-            new Url(shortIdGenerator.generateRandomHash(), urlCreateRequest.getUrl())
+            Url.builder()
+                .shortUrl(shortIdGenerator.generateRandomHash())
+                .originalUrl(urlCreateRequest.getUrl())
+                .build()
         );
 
-        return getUrlResponse( urlCreated );
+        return getUrlResponse(urlCreated, 0);
     }
 
-    public UrlResponse getByShortUrl(String shortUrl) {
-        Optional<Url> urlOptional = urlRepository.findById(shortUrl);
+    public UrlResponse getByShortUrl(String shortUrl, String ipAddress) {
+        Url url = urlRepository.findByShortUrl(shortUrl).orElseThrow(() -> new UrlNotFoundException("URL not found for shortUrl: " + shortUrl));
 
-        if (urlOptional.isPresent()) {
-            return getUrlResponse( urlOptional.get() );
-        } else {
-            throw new UrlNotFoundException("URL not found for shortUrl: " + shortUrl);
-        }
+        // Increment clicks
+        urlClickRepository.save(
+                UrlClick.builder()
+                .urlId(url.getId())
+                .ip(ipAddress)
+                .timestamp(LocalDateTime.now())
+                .build()
+        );
+
+        return getUrlResponse(url, 0);
     }
 
-    public UrlResponse getUrlResponse(Url url) {
-        return new UrlResponse(url.getShortUrl(), url.getOriginalUrl());
+    private UrlResponse getUrlResponse(Url url, int clicks) {
+        return new UrlResponse(url.getShortUrl(), url.getOriginalUrl(), clicks);
+    }
+
+    public void delete(String shortUrl) {
+        urlClickRepository.deleteAll(urlClickRepository.findAllByUrlId(shortUrl));
+        urlRepository.deleteByShortUrl(shortUrl);
     }
 }

@@ -5,22 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "urls")
+import java.time.LocalDateTime;
+
+@Document(collection = "url_clicks")
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Url {
+public class UrlClick {
     @Id
     private String id;
-
-    @Indexed(unique = true)
-    private String shortUrl;
-
-    @Indexed(unique = true)
-    private String originalUrl;
+    private String urlId;
+    private String ip;
+    private LocalDateTime timestamp;
 }
 
