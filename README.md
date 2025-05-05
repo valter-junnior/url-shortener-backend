@@ -12,11 +12,13 @@
 
 <h2 id="tech">💻 Technologies</h2>
 
-- Java 24
-- Spring Boot 3
-- Maven
-- NanoID (for short URL generation)
-- MongoDB
+* Java 21 (Temurin)
+* Spring Boot 3
+* Maven
+* NanoID (for short URL generation)
+* MongoDB
+* Docker & Docker Compose
+* NGINX (reverse proxy)
 
 <h2 id="started">🚀 Getting started</h2>
 
@@ -24,10 +26,12 @@ How to run this project locally.
 
 <h3>Prerequisites</h3>
 
+- [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
 - [Java 21](https://adoptium.net/)
 - [Maven](https://maven.apache.org/)
 - [Git](https://git-scm.com/)
 - [MongoDB](https://www.mongodb.com/try/download/community)
+- [NGINX](https://nginx.org/en/download.html)
 
 <h3>Cloning</h3>
 
@@ -35,6 +39,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/valter-junnior/url-shortener-backend.git
+cd url-shortener-backend
 ```
 
 <h3>Config .env variables</h3>
@@ -46,20 +51,18 @@ spring.application.name=url-shortener
 spring.data.mongodb.uri=mongodb://root:rootpassword@localhost:27017/urlshortenerdb?authSource=admin
 ```
 
-<h3>Starting</h3>
+<h3>Running with Docker Compose</h3>
 
-Navigate to the project folder and run:
-
-```bash
-cd urlshortener
-./mvnw spring-boot:run
-```
-
-or using Maven installed globally:
+Build and start the full stack (MongoDB + Spring Boot + NGINX):
 
 ```bash
-mvn spring-boot:run
+docker-compose up --build
 ```
+
+This will:
+✅ Build the Spring Boot app
+✅ Start MongoDB with authentication
+✅ Start NGINX as a reverse proxy (serving on `localhost:80`)
 
 <h2 id="routes">📍 API Endpoints</h2>
 
@@ -126,8 +129,9 @@ GET /api/urls/abc12
 
 **RESPONSE**
 
-```http request
+```
 HTTP/1.1 301 Moved Permanently
+Location: https://www.example.com/your-very-long-url
 ```
 
 <h3>DELETE /api/links/{shortUrl}</h3>
@@ -140,9 +144,9 @@ DELETE /api/urls/abc12
 
 **RESPONSE**
 
-````http request
+```
 HTTP/1.1 204 No Content
-````
+```
 
 <h2 id="frontend">🔗 Frontend</h2>
 
