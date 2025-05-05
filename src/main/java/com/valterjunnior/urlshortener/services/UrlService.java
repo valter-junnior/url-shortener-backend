@@ -28,12 +28,11 @@ public class UrlService {
     }
 
     public UrlResponse create(UrlCreateRequest urlCreateRequest) {
-        int durationMinutes = 1;
         Url urlCreated = urlRepository.save(
             Url.builder()
                 .shortUrl(shortIdGenerator.generateRandomHash())
                 .originalUrl(urlCreateRequest.getUrl())
-                .expirationDate(LocalDateTime.now().plusMinutes(durationMinutes))
+                .expirationDate(LocalDateTime.now().plusDays(1))
                 .build()
         );
 

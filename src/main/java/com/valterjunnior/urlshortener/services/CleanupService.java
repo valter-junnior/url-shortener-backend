@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 public class CleanupService {
     private UrlRepository urlRepository;
 
-    // 1 em 1 minuto
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void removeExpiredUrls() {
         urlRepository.deleteByExpirationDateBefore(LocalDateTime.now());
     }
