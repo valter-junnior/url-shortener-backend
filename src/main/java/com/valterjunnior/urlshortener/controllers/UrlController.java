@@ -42,7 +42,6 @@ public class UrlController {
     public ResponseEntity<Void> delete(@PathVariable String shortUrl) {
         urlService.delete(shortUrl);
 
-
         return ResponseEntity.noContent().build();
     }
 }

@@ -21,4 +21,3 @@ public class UrlClick {
     private String ip;
     private LocalDateTime timestamp;
 }
-

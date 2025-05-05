@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "urls")
 @AllArgsConstructor
 @Getter
@@ -22,5 +24,7 @@ public class Url {
 
     @Indexed(unique = true)
     private String originalUrl;
+
+    private LocalDateTime expirationDate;
 }
 
